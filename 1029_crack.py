@@ -7,15 +7,22 @@ import hashlib,base64
 #
 #
 # Sample - Psudocode would be better spelled out as Base64(SHA256binary(UTF-16LE(UserName))
-# Event ID 1029 Description is = Base64(SHA256(UserName)) is = s8v7wS1UMkc0myytGIXeX2MWh9ojpi4aKwRwbOwFS5U=-
+# Event ID 1029 Description is = Base64(SHA256(UserName)) is = UmTGMgTFbA35+PSgMOoZ2ToPpAK+awC010ZOYWQQIfc=-
 #
 # username = "ServerUser01"
 # username = username.decode('utf-8').encode('utf-16le')
 # hash = hashlib.sha256(username).digest() # note NOT .hexdigest()
 # print base64.b64encode(hash)
+#
+# --- Some Notable Hashes ---
+# Administrator:	UmTGMgTFbA35+PSgMOoZ2ToPpAK+awC010ZOYWQQIfc=
+# administrator:	WAlZ81aqzLQmoWEfQivmPQwJxIm/XQcDjplQdjznr5E=
+# Guest:		EYafGFixlNF6rmWxFFF7o4CrI0VoyuqZr6O60Igzr0I=
+# guest:		OsLcy6J+ON0FM13n1l5aMCOw8K4paLSthgtHiWDnGzk=
+#
 
 # Relace these two variables with your own
-hash = "s8v7wS1UMkc0myytGIXeX2MWh9ojpi4aKwRwbOwFS5U=-"
+hash = "UmTGMgTFbA35+PSgMOoZ2ToPpAK+awC010ZOYWQQIfc=-"
 wordlist = "/usr/share/wordlists/rockyou.txt"
 
 if base64.b64encode(base64.b64decode(hash)) == hash:
