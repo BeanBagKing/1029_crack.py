@@ -1,8 +1,9 @@
 #!/usr/bin/python
-import hashlib,base64
+import hashlib,base64,traceback
 
 # "Cracks" Event ID 1029 hashes, given a starting hash and a list of usernames
 # Thanks to reddit's /u/RedPh0enix and /u/Belgarion0 for basically everything.
+# https://www.reddit.com/r/AskNetsec/comments/8kid7k/microsoft_rdp_logs_base64sha256username/
 # They did all the hard work and figured out Microsoft's formatting.
 #
 #
@@ -22,25 +23,43 @@ import hashlib,base64
 #
 
 # Relace these two variables with your own
-hash = "UmTGMgTFbA35+PSgMOoZ2ToPpAK+awC010ZOYWQQIfc=-"
-wordlist = "/usr/share/wordlists/rockyou.txt"
+hash = "UmTGMgTFbA35+PSgMOoZ2ToPpAK+awC010ZOYWQQIfc="
+wordlist = "/usr/share/wordlists/rockyou.txt" # Dear God don't actually use this, it's just here for a placeholder
+
+RED='\033[1;31m'
+GRN='\033[1;32m'
+YEL='\033[1;33m'
+BLU='\033[1;34m'
+GRY='\033[1;90m'
+LRD='\033[1;41m' # Red Background, White Letters
+NC='\033[0m' # No Color
 
 if base64.b64encode(base64.b64decode(hash)) == hash:
 	pass;
 else:
 	print "Hash does not appear to be valid base64"
-	print "To force continue, comment out exit() below"
+	print "To force continue, comment out exit() below this line in the script"
 	exit()
 
 with open(wordlist) as f:
+	i = 0
 	lines = f.readlines()
 	for line in lines:
 		line = line.strip()
-		username = line.decode('utf-8').encode('utf-16le')
+		try: # Found a string with invalid encoding breaks the script. Toss the user an error and containue
+			username = line.decode('utf-8').encode('utf-16le')
+		except:
+			print(LRD + "An error occured with string:" + NC + " " + line + " " + LRD + "Continuing..." + NC)
+			traceback.print_exc()
 		test = hashlib.sha256(username).digest().encode('base64').strip()
 		test = test.strip() # not sure why, but we get a line break added, so .strip()
+		i += 1
+		if i % 500000 == 0: # For very long scripts, we may want status updates
+			print(YEL + "Status update: " + str(i) + " names tested" + NC)
+			print(YEL + "Currently testing: " + line + NC)
 		if test == hash:
-			print "Hash: " + test
-			print "Username: " + line
+			print(GRN + "--- MATCH FOUND ---" + NC)
+			print(GRN + "Hash: " + test + NC)
+			print(GRN + "Username: " + line + NC)
 			exit()
-	print "Sorry, nothing found"
+	print(BLU + "Sorry, nothing found" + NC)
