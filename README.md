@@ -25,6 +25,6 @@ guest:		OsLcy6J+ON0FM13n1l5aMCOw8K4paLSthgtHiWDnGzk=
 
 #### m91029.pm - Hashcat test_module added 7/15/2021
 I thought about opening a seperate repo for this, and if I do figure out how to build a proper hashcat plugin I will.
-However, I felt like this is more appropriate for this repo as it gives a sample script in another language (Perl).
+However, I felt like this script is more appropriate here as it gives a sample script in another language (Perl).
 For usage, reference the Hashcat Test Suite: https://github.com/hashcat/hashcat/blob/master/docs/hashcat-plugin-development-guide.md#test-suite
 Nearly everything you would need to incorporate this into your own script is on line 21 though.
