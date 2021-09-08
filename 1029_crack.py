@@ -7,7 +7,7 @@ import hashlib,base64,traceback
 # They did all the hard work and figured out Microsoft's formatting.
 #
 #
-# Sample - Psudocode would be better spelled out as Base64(SHA256binary(UTF-16LE(UserName))
+# Sample - Pseudocode would be better spelled out as Base64(SHA256binary(UTF-16LE(UserName))
 # Event ID 1029 Description is = Base64(SHA256(UserName)) is = UmTGMgTFbA35+PSgMOoZ2ToPpAK+awC010ZOYWQQIfc=-
 #
 # username = "ServerUser01"
