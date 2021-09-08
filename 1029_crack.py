@@ -22,7 +22,7 @@ import hashlib,base64,traceback
 # guest:		OsLcy6J+ON0FM13n1l5aMCOw8K4paLSthgtHiWDnGzk=
 #
 
-# Relace these two variables with your own
+# Replace these two variables with your own
 hash = "UmTGMgTFbA35+PSgMOoZ2ToPpAK+awC010ZOYWQQIfc="
 wordlist = "/usr/share/wordlists/rockyou.txt" # Dear God don't actually use this, it's just here for a placeholder
 
