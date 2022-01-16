@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 import hashlib
 import base64
 import traceback
@@ -15,7 +16,7 @@ NC='\033[0m' # No Color
 
 def decode_event_1029_hash():
     '''
-      Event ID 1029 hashes, given a starting hash and a list of usernames
+     Event ID 1029 hashes, given a starting hash and a list of usernames
      Thanks to reddit's /u/RedPh0enix and /u/Belgarion0 for basically everything.
      https://www.reddit.com/r/AskNetsec/comments/8kid7k/microsoft_rdp_logs_base64sha256username/
      They did all the hard work and figured out Microsoft's formatting.
@@ -35,6 +36,8 @@ def decode_event_1029_hash():
      Guest:		EYafGFixlNF6rmWxFFF7o4CrI0VoyuqZr6O60Igzr0I=
      guest:		OsLcy6J+ON0FM13n1l5aMCOw8K4paLSthgtHiWDnGzk=
     '''
+
+    # Instantiate argeparse Object
     parser = argparse.ArgumentParser(description='Event ID 1029 hashes', 
              formatter_class=argparse.RawDescriptionHelpFormatter)
 
@@ -50,43 +53,48 @@ def decode_event_1029_hash():
                         type=str,
                         required=True,
                         help='File of potential usernames')
+
     # Execute parse_args()
     args = parser.parse_args()
 
-
+    # Assign input arguments to variables
     hash = args.hash
     wordlist = args.file
 
+    # Check if hash supplied by user are bytes, if not then convert
     if isinstance(hash, bytes):
         pass
     else:
         hash = bytes(hash, 'utf-8')
 
+    # Check that hash supplied by user is in correct format (Base64)
     if base64.b64encode(base64.b64decode(hash)) == hash:
-        pass;
+        pass
     else:
         print(RED + f"[*] " + NC + f"Hash does not appear to be valid base64")
-        # print (f"To force continue, comment out exit() below this line in the script")
         exit()
 
-
+    # Iterate through username list
     with open(wordlist) as f:
         i = 0
         lines = f.readlines()
         for line in lines:
             line = line.strip()
-            try: # Found a string with invalid encoding breaks the script. Toss the user an error and containue
+            try: # Found a string with invalid encoding breaks the script. Toss the user an error and continue
                 username = line.encode('utf-16le')
             except:
                 print(RED + f"[*] " + NC + f"An error occured with string: " + LRD + f"{line}. " + NC + f"Continuing...")
                 traceback.print_exc()
-            test = hashlib.sha256(username).digest()
 
-            test = base64.b64encode(test).strip() # not sure why, but we get a line break added, so .strip()
+            test = base64.b64encode(hashlib.sha256(username).digest()).strip()
+
+            # For very long scripts, we may want status updates
             i += 1
-            if i % 500000 == 0: # For very long scripts, we may want status updates
+            if i % 500000 == 0:                 
                 print(YEL + f"[-] " + NC + f"Status update: {str(i)} names tested")
                 print(YEL + f"[-] " + NC + f"Currently testing: {line}")
+            
+            # Check if hash matches supplied username
             if test == hash:
                 print(GRN + f"[+] " + NC + f"Match Found")
                 print(f"Hash: {test.decode('utf-8')}")
@@ -94,7 +102,7 @@ def decode_event_1029_hash():
                 exit()
         print(BLU + f"[-] " + NC +  f"Sorry, nothing found")
 
-        return
+        return()
 
 if __name__ == '__main__':
 
