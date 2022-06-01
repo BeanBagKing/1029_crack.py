@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import hashlib,base64,traceback
 
 # "Cracks" Event ID 1029 hashes, given a starting hash and a list of usernames
@@ -24,7 +24,7 @@ import hashlib,base64,traceback
 
 # Relace these two variables with your own
 hash = "UmTGMgTFbA35+PSgMOoZ2ToPpAK+awC010ZOYWQQIfc="
-wordlist = "/usr/share/wordlists/rockyou.txt" # Dear God don't actually use this, it's just here for a placeholder
+wordlist = "/mnt/c/Tools/1029crack/rockyou.txt" # Dear God don't actually use this, it's just here for a placeholder
 
 RED='\033[1;31m'
 GRN='\033[1;32m'
@@ -34,11 +34,11 @@ GRY='\033[1;90m'
 LRD='\033[1;41m' # Red Background, White Letters
 NC='\033[0m' # No Color
 
-if base64.b64encode(base64.b64decode(hash)) == hash:
+if str(base64.b64encode(base64.b64decode(hash)), 'utf-8') == hash:
 	pass;
 else:
-	print "Hash does not appear to be valid base64"
-	print "To force continue, comment out exit() below this line in the script"
+	print("Hash does not appear to be valid base64")
+	print("To force continue, comment out exit() below this line in the script")
 	exit()
 
 with open(wordlist) as f:
@@ -47,14 +47,17 @@ with open(wordlist) as f:
 	for line in lines:
 		line = line.strip()
 		try: # Found a string with invalid encoding breaks the script. Toss the user an error and containue
-			username = line.decode('utf-8').encode('utf-16le')
+			username = line.encode('utf-16le')
 		except:
 			print(LRD + "An error occured with string:" + NC + " " + line + " " + LRD + "Continuing..." + NC)
 			traceback.print_exc()
-		test = hashlib.sha256(username).digest().encode('base64').strip()
+		test = hashlib.sha256(username).digest()
+		test = base64.b64encode(test).strip()
 		test = test.strip() # not sure why, but we get a line break added, so .strip()
+		test = str(test, 'utf-8')
+		print(test)
 		i += 1
-		if i % 500000 == 0: # For very long scripts, we may want status updates
+		if i % 50000 == 0: # For very long scripts, we may want status updates
 			print(YEL + "Status update: " + str(i) + " names tested" + NC)
 			print(YEL + "Currently testing: " + line + NC)
 		if test == hash:
