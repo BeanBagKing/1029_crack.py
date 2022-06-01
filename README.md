@@ -4,7 +4,7 @@ Thanks to reddit's /u/RedPh0enix and /u/Belgarion0 for basically everything.
 https://www.reddit.com/r/AskNetsec/comments/8kid7k/microsoft_rdp_logs_base64sha256username/  
 They did all the hard work and figured out Microsoft's formatting.
 
-Update 1 Jun 2022 - Updated for Python 3
+**Update 1 Jun 2022 - Updated for Python 3**
 
 
 Sample - Psudocode would be better spelled out as Base64(SHA256binary(UTF-16LE(UserName))  
