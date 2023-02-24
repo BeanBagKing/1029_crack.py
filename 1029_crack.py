@@ -7,7 +7,7 @@ import hashlib,base64,traceback
 # They did all the hard work and figured out Microsoft's formatting.
 #
 #
-# Sample - Psudocode would be better spelled out as Base64(SHA256binary(UTF-16LE(UserName))
+# Sample - Pseudocode would be better spelled out as Base64(SHA256binary(UTF-16LE(UserName))
 # Event ID 1029 Description is = Base64(SHA256(UserName)) is = UmTGMgTFbA35+PSgMOoZ2ToPpAK+awC010ZOYWQQIfc=-
 #
 # username = "ServerUser01"
@@ -22,7 +22,7 @@ import hashlib,base64,traceback
 # guest:		OsLcy6J+ON0FM13n1l5aMCOw8K4paLSthgtHiWDnGzk=
 #
 
-# Relace these two variables with your own
+# Replace these two variables with your own
 hash = "UmTGMgTFbA35+PSgMOoZ2ToPpAK+awC010ZOYWQQIfc="
 wordlist = "/mnt/c/Tools/1029crack/rockyou.txt" # Dear God don't actually use this, it's just here for a placeholder
 
