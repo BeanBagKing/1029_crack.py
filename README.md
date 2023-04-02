@@ -34,7 +34,8 @@ For usage, reference the Hashcat Test Suite: https://github.com/hashcat/hashcat/
 
 Nearly everything you would need to incorporate this into your own script is on line 21 though.
 
-**Update 1 Apr 2023 - Update to add Golang script*
+**Update 1 Apr 2023 - Update to add Golang script**
+
 Playing around with ChatGPT/Bing Chat and writing code, used this one as a simple test case. It got a lot of things wrong, but in a lot of places got it close enough that I could fix the logic errors or the order of operations wtihout really knowing the language. It's pretty incredible. 
 
 New changes are command line flags, e.g. it should now be run as:
