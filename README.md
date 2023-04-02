@@ -5,7 +5,8 @@ https://www.reddit.com/r/AskNetsec/comments/8kid7k/microsoft_rdp_logs_base64sha2
 They did all the hard work and figured out Microsoft's formatting.
 
 **Update 1 Jun 2022 - Updated for Python 3**
-**Update 1 Apr 2023 - Update to add Golang script, see very bottom*
+
+**Update 1 Apr 2023 - Update to add Golang script, see very bottom**
 
 Sample - Psudocode would be better spelled out as Base64(SHA256binary(UTF-16LE(UserName))  
 Event ID 1029 Description is **Base64(SHA256(UserName)) is = UmTGMgTFbA35+PSgMOoZ2ToPpAK+awC010ZOYWQQIfc=-**
