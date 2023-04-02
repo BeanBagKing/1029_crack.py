@@ -5,7 +5,7 @@ https://www.reddit.com/r/AskNetsec/comments/8kid7k/microsoft_rdp_logs_base64sha2
 They did all the hard work and figured out Microsoft's formatting.
 
 **Update 1 Jun 2022 - Updated for Python 3**
-
+**Update 1 Apr 2023 - Update to add Golang script, see very bottom*
 
 Sample - Psudocode would be better spelled out as Base64(SHA256binary(UTF-16LE(UserName))  
 Event ID 1029 Description is **Base64(SHA256(UserName)) is = UmTGMgTFbA35+PSgMOoZ2ToPpAK+awC010ZOYWQQIfc=-**
@@ -32,3 +32,13 @@ However, I felt like this script is more appropriate here as it gives a sample i
 For usage, reference the Hashcat Test Suite: https://github.com/hashcat/hashcat/blob/master/docs/hashcat-plugin-development-guide.md#test-suite
 
 Nearly everything you would need to incorporate this into your own script is on line 21 though.
+
+**Update 1 Apr 2023 - Update to add Golang script*
+Playing around with ChatGPT/Bing Chat and writing code, used this one as a simple test case. It got a lot of things wrong, but in a lot of places got it close enough that I could fix the logic errors or the order of operations wtihout really knowing the language. It's pretty incredible. 
+
+New changes are command line flags, e.g. it should now be run as:
+
+`go run .\1029_crack.go -hash UmTGMgTFbA35+PSgMOoZ2ToPpAK+awC010ZOYWQQIfc= -wordlist C:\Users\Mike\Downloads\rockyou.txt`
+
+or compiled with `go build` into an executable that you can run. This version is much faster.
+ 
