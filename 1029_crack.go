@@ -30,7 +30,6 @@ func main() {
 		panic(err)
 	}
 
-	//hash := strings.TrimSpace(*hashPtr)
 	lines := strings.Split(string(content), "\n")
 	var wg sync.WaitGroup
 	for _, line := range lines {
@@ -41,7 +40,6 @@ func main() {
 			username := utf8ToUtf16le(line)
 			test := sha256.Sum256(username)
 			testBase64 := base64.StdEncoding.EncodeToString(test[:])
-			//fmt.Println(testBase64)
 			if testBase64 == *hashPtr {
 				fmt.Println("--- MATCH FOUND ---")
 				fmt.Println("Hash: " + testBase64)
