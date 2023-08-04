@@ -51,7 +51,7 @@ with open(wordlist) as f:
 		except:
 			print(LRD + "An error occured with string:" + NC + " " + line + " " + LRD + "Continuing..." + NC)
 			traceback.print_exc()
-		test = hashlib.sha256(username).digest()
+		test = hashlib.sha1(username).digest()
 		test = base64.b64encode(test).strip()
 		test = test.strip() # not sure why, but we get a line break added, so .strip()
 		test = str(test, 'utf-8')
